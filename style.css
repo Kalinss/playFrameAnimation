@@ -1,0 +1,8 @@
+#animate-box{
+    width: 130px;
+    height: 190px;
+    background-image: url('css-sprites-animated-film-walk-cycle-sprite.jpg');
+    background-repeat: no-repeat;
+    background-position: 0 0;
+
+}
