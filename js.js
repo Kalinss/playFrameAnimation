@@ -1,3 +1,5 @@
+const element = document.getElementById("animate-box");
+
 class AnimateStep {
   constructor(animationParam) {
     this.frameHeight = animationParam.frameHeight;
@@ -13,8 +15,14 @@ class AnimateStep {
     this.positionX = 0;
     this.positionY = 0;
     this.maxFrame = animationParam.maxFrame;
+    this.work = false;
 
     this.interval;
+    this.animate;
+  }
+  toggle() {
+    console.log(this.work);
+    this.work ? this.stop() : this.start();
   }
   reset() {
     this.positionX = 0;
@@ -24,7 +32,10 @@ class AnimateStep {
     this.el.style.backgroundPositionX = this.positionX + "px";
   }
   stop() {
-    clearInterval(this.interval);
+    this.work = false;
+    clearTimeout(this.interval);
+    cancelAnimationFrame(this.animate);
+    this.reset();
   }
   render() {
     this.el.style.backgroundPositionX = this.positionX + "px";
@@ -32,6 +43,7 @@ class AnimateStep {
   }
 
   start() {
+    this.work = true;
     let countIterationX = 1;
     let count = 1;
     const step = () => {
@@ -51,13 +63,12 @@ class AnimateStep {
       count += 1;
       this.render();
 
-      setTimeout(() => {
-        requestAnimationFrame(step);
+      this.interval = setTimeout(() => {
+        this.animate = requestAnimationFrame(step);
       }, 1000 / 25);
-
     };
 
-    requestAnimationFrame(step);
+    this.animate = requestAnimationFrame(step);
   }
 }
 const man = new AnimateStep({
@@ -66,8 +77,10 @@ const man = new AnimateStep({
   frameWidth: 6,
   heightSprite: 920,
   maxFrame: 28,
-  el: document.getElementById("animate-box"),
+  el: element,
 });
 
-man.preStart();
-man.start();
+document.getElementById('walkman').onclick = () => {
+  man.toggle();
+};
+

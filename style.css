@@ -4,5 +4,21 @@
     background-image: url('css-sprites-animated-film-walk-cycle-sprite.jpg');
     background-repeat: no-repeat;
     background-position: 0 0;
-
+}
+.wrapper-man{
+    display: flex;
+    width: 450px;
+    align-items: center;
+}
+#walkman{
+    margin-left: 50px;
+}
+.wrapper-knigth{
+    display: flex;
+    align-items: center;
+}
+.wrapper-button{
+    margin-left: 35px;
+    display: flex;
+    justify-content: center;
 }
